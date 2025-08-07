@@ -4,81 +4,116 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CHECKMACHINA V1.0</title>
+  <title>CHECKMACHINA v1.0</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
-
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: black;
-      font-family: 'Share Tech Mono', monospace;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+    @font-face {
+      font-family: 'PerfectDOS';
+      src: url('https://www.zone38.net/font/PerfectDOSVGA437.ttf');
     }
 
-    .window {
-      width: 700px;
-      border: 3px solid #00ff00;
+    body {
       background-color: black;
-      box-shadow: 0 0 15px #00ff00;
+      color: #00FF00;
+      font-family: 'PerfectDOS', monospace;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .crt-frame {
+      border: 10px solid #555;
+      padding: 20px;
+      margin: 50px auto;
+      width: 90%;
+      max-width: 700px;
+      background: linear-gradient(to bottom, #000000, #101010);
+      box-shadow: 0 0 40px rgba(0, 255, 0, 0.5);
+      position: relative;
     }
 
     .title-bar {
-      background-color: #003366;
-      color: #00ff00;
-      padding: 10px;
-      font-size: 1.6rem;
+      background-color: #00a2ff;
+      padding: 4px 10px;
+      font-size: 10px;
       font-weight: bold;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 2px solid #00ff00;
+      color: black;
+      text-align: right;
+      position: absolute;
+      top: -20px;
+      right: 0;
+      left: 0;
     }
 
-    .subtitle {
-      font-size: 0.9rem;
-      font-weight: normal;
+    h1 {
+      font-size: 28px;
+      color: #00ff00;
+      text-align: center;
+      animation: blink 1.5s infinite;
+      margin-bottom: 40px;
     }
 
-    .content {
-      padding: 25px;
+    label, input, button {
+      font-size: 16px;
       color: #00ff00;
     }
 
-    .prompt {
-      font-size: 1rem;
-      margin-bottom: 15px;
-    }
-
-    .input-section {
-      background-color: black;
-      padding: 10px;
+    input {
+      background: black;
       border: 1px solid #00ff00;
-      display: inline-block;
       color: #00ff00;
-      margin-bottom: 20px;
+      padding: 5px 10px;
+      width: 80%;
+      margin-right: 10px;
     }
 
-    .scan-result {
-      font-weight: bold;
+    button {
+      background-color: black;
+      border: 1px solid #00ff00;
+      padding: 5px 15px;
+      cursor: pointer;
+      animation: blink 2s infinite;
+    }
+
+    .result {
+      margin-top: 30px;
+      font-size: 18px;
       color: #00ff00;
+      animation: flicker 1.5s infinite alternate;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    @keyframes flicker {
+      0% { opacity: 1; text-shadow: 0 0 5px #0f0; }
+      50% { opacity: 0.8; text-shadow: 0 0 20px #0f0; }
+      100% { opacity: 1; text-shadow: 0 0 5px #0f0; }
     }
   </style>
 </head>
 <body>
-  <div class="window">
-    <div class="title-bar">
-      <div>CHECKMACHINA V1.0</div>
-      <div class="subtitle">Project by Enrique Lledó</div>
-    </div>
-    <div class="content">
-      <div class="prompt">> Type the name of a game:</div>
-      <div class="input-section">[ Half-Life Alyx ] [SCAN]</div>
-      <div class="scan-result">☑ Your system can run this game on HIGH settings</div>
-    </div>
+  <div class="crt-frame">
+    <div class="title-bar">A project by Enrique Lledó</div>
+    <h1>CHECKMACHINA V1.0</h1>
+    <label for="game">> Enter game title:</label><br><br>
+    <input type="text" id="game" placeholder="Half-Life Alyx" />
+    <button onclick="checkGame()">CHECK</button>
+    <div class="result" id="result"></div>
   </div>
+
+  <script>
+    function checkGame() {
+      const game = document.getElementById("game").value.trim();
+      const result = document.getElementById("result");
+      if (game === "") {
+        result.innerHTML = "> Please enter a game name.";
+        return;
+      }
+      // Simulate check result for now
+      result.innerHTML = "> Your system can run '" + game + "' on HIGH settings.";
+    }
+  </script>
 </body>
 </html>
