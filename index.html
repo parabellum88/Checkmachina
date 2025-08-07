@@ -1,97 +1,146 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>CHECKMACHINA™ V1.0</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
-
-        body {
-            background-color: black;
-            color: #00ff00;
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 1.2em;
-            margin: 0;
-            padding: 40px;
-            animation: flicker 1.5s infinite alternate;
-        }
-
-        h1 {
-            text-align: center;
-            font-size: 2.5em;
-            margin-bottom: 50px;
-            color: #00ff00;
-        }
-
-        .text-block {
-            margin-left: 30px;
-            white-space: pre-line;
-        }
-
-        .input-section {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 30px;
-            gap: 10px;
-        }
-
-        input[type="text"] {
-            background-color: black;
-            border: 2px solid #00ff00;
-            color: #00ff00;
-            padding: 10px;
-            font-size: 1em;
-            font-family: 'Share Tech Mono', monospace;
-            width: 300px;
-            outline: none;
-        }
-
-        button {
-            background-color: black;
-            color: #00ff00;
-            border: 2px solid #00ff00;
-            padding: 10px 20px;
-            font-family: 'Share Tech Mono', monospace;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #002200;
-        }
-
-        .footer {
-            position: absolute;
-            bottom: 20px;
-            width: 100%;
-            text-align: center;
-            color: #00ff00;
-            font-size: 0.9em;
-        }
-
-        @keyframes flicker {
-            0% { opacity: 1; }
-            50% { opacity: 0.85; }
-            100% { opacity: 1; }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CHECKMACHINA</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+    body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      color: #00ff00;
+      font-family: 'Share Tech Mono', monospace;
+      overflow: hidden;
+    }
+    .matrix-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100vw;
+      z-index: 0;
+    }
+    canvas {
+      display: block;
+    }
+    .container {
+      position: relative;
+      z-index: 1;
+      padding: 3em;
+      text-align: center;
+    }
+    .title {
+      font-size: 2.5em;
+      font-weight: bold;
+      letter-spacing: 0.1em;
+      text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+      animation: flicker 1.5s infinite alternate;
+    }
+    .tm {
+      font-size: 0.4em;
+      vertical-align: super;
+      margin-left: 4px;
+    }
+    @keyframes flicker {
+      from { opacity: 1; }
+      to { opacity: 0.5; }
+    }
+    .text-block {
+      margin-top: 2em;
+      margin-bottom: 2em;
+      font-size: 1.1em;
+      line-height: 1.8;
+    }
+    .input-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1em;
+    }
+    input[type="text"] {
+      background: black;
+      border: 2px solid #00ff00;
+      color: #00ff00;
+      padding: 0.5em;
+      font-size: 1em;
+      font-family: 'Share Tech Mono', monospace;
+      width: 300px;
+      caret-color: #00ff00;
+      animation: cursorBlink 1s step-start infinite;
+    }
+    @keyframes cursorBlink {
+      50% { caret-color: transparent; }
+    }
+    button {
+      background: black;
+      border: 2px solid #00ff00;
+      color: #00ff00;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 1em;
+      padding: 0.5em 1.5em;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+    }
+    button:hover {
+      background: #00ff00;
+      color: black;
+    }
+    footer {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 0.9em;
+      color: #00ff00;
+    }
+  </style>
 </head>
 <body>
-    <h1>CHECKMACHINA™ V1.0</h1>
+  <div class="matrix-background">
+    <canvas id="matrix"></canvas>
+  </div>
+  <div class="container">
+    <div class="title">CHECKMACHINA<span class="tm">™</span> V1.0</div>
     <div class="text-block">
-        Hello...<br>
-        Wake up...<br>
-        The CheckMachina has you...<br>
-        Follow the black rabbit.<br>
-        _ _ _ _ _ _ _
+      <p>Hello...</p>
+      <p>Wake up...</p>
+      <p>The CheckMachina has you...</p>
+      <p>Follow the black rabbit.</p>
+      <p>_ _ _ _ _ _ _</p>
     </div>
-
-    <div class="input-section">
-        <input type="text" placeholder="Enter game/program name...">
-        <button>[ CHECK ]</button>
+    <div class="text-block">Escribe aquí el nombre del juego o programa:</div>
+    <div class="input-wrapper">
+      <input type="text" placeholder="Half-Life Alyx" />
+      <button>CHECK</button>
     </div>
+  </div>
+  <footer>A project by Enrique Lledó ®</footer>
 
-    <div class="footer">A project by Enrique Lledó ®</div>
+  <script>
+    const canvas = document.getElementById("matrix");
+    const ctx = canvas.getContext("2d");
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+    const letters = "アァイィウエカガキギクグケゲコゴサザシジスズセソタチッツナニヌネノハバパヒフヘホマミムメモヤユヨラリルレロワヲン0123456789";
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = new Array(Math.floor(columns)).fill(1);
+    function draw() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#0F0";
+      ctx.font = fontSize + "px monospace";
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      }
+    }
+    setInterval(draw, 33);
+  </script>
 </body>
 </html>
