@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CheckMachina</title>
+    <style>
+        body {
+            background-color: black;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 0.3em;
+        }
+        .subtitle {
+            font-size: 1em;
+            margin-bottom: 2em;
+            color: #55ff55;
+        }
+        .terminal-line {
+            display: flex;
+            align-items: center;
+        }
+        .cursor {
+            width: 10px;
+            height: 20px;
+            background-color: #00ff00;
+            margin-left: 5px;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <h1>CheckMachina</h1>
+    <div class="subtitle">Project by Enrique Lledó</div>
+    <div class="terminal-line">
+        <span>Initializing system...</span><div class="cursor"></div>
+    </div>
+</body>
+</html>
