@@ -2,118 +2,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CHECKMACHINA v1.0</title>
-  <style>
-    @font-face {
-      font-family: 'PerfectDOS';
-      src: url('https://www.zone38.net/font/PerfectDOSVGA437.ttf');
-    }
+    <meta charset="UTF-8">
+    <title>CHECKMACHINA™ V1.0</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
-    body {
-      background-color: black;
-      color: #00FF00;
-      font-family: 'PerfectDOS', monospace;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-    }
+        body {
+            background-color: black;
+            color: #00ff00;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.2em;
+            margin: 0;
+            padding: 40px;
+            animation: flicker 1.5s infinite alternate;
+        }
 
-    .crt-frame {
-      border: 10px solid #555;
-      padding: 20px;
-      margin: 50px auto;
-      width: 90%;
-      max-width: 700px;
-      background: linear-gradient(to bottom, #000000, #101010);
-      box-shadow: 0 0 40px rgba(0, 255, 0, 0.5);
-      position: relative;
-    }
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 50px;
+            color: #00ff00;
+        }
 
-    .title-bar {
-      background-color: #00a2ff;
-      padding: 4px 10px;
-      font-size: 10px;
-      font-weight: bold;
-      color: black;
-      text-align: right;
-      position: absolute;
-      top: -20px;
-      right: 0;
-      left: 0;
-    }
+        .text-block {
+            margin-left: 30px;
+            white-space: pre-line;
+        }
 
-    h1 {
-      font-size: 28px;
-      color: #00ff00;
-      text-align: center;
-      animation: blink 1.5s infinite;
-      margin-bottom: 40px;
-    }
+        .input-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+            gap: 10px;
+        }
 
-    label, input, button {
-      font-size: 16px;
-      color: #00ff00;
-    }
+        input[type="text"] {
+            background-color: black;
+            border: 2px solid #00ff00;
+            color: #00ff00;
+            padding: 10px;
+            font-size: 1em;
+            font-family: 'Share Tech Mono', monospace;
+            width: 300px;
+            outline: none;
+        }
 
-    input {
-      background: black;
-      border: 1px solid #00ff00;
-      color: #00ff00;
-      padding: 5px 10px;
-      width: 80%;
-      margin-right: 10px;
-    }
+        button {
+            background-color: black;
+            color: #00ff00;
+            border: 2px solid #00ff00;
+            padding: 10px 20px;
+            font-family: 'Share Tech Mono', monospace;
+            cursor: pointer;
+        }
 
-    button {
-      background-color: black;
-      border: 1px solid #00ff00;
-      padding: 5px 15px;
-      cursor: pointer;
-      animation: blink 2s infinite;
-    }
+        button:hover {
+            background-color: #002200;
+        }
 
-    .result {
-      margin-top: 30px;
-      font-size: 18px;
-      color: #00ff00;
-      animation: flicker 1.5s infinite alternate;
-    }
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            color: #00ff00;
+            font-size: 0.9em;
+        }
 
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-
-    @keyframes flicker {
-      0% { opacity: 1; text-shadow: 0 0 5px #0f0; }
-      50% { opacity: 0.8; text-shadow: 0 0 20px #0f0; }
-      100% { opacity: 1; text-shadow: 0 0 5px #0f0; }
-    }
-  </style>
+        @keyframes flicker {
+            0% { opacity: 1; }
+            50% { opacity: 0.85; }
+            100% { opacity: 1; }
+        }
+    </style>
 </head>
 <body>
-  <div class="crt-frame">
-    <div class="title-bar">A project by Enrique Lledó</div>
-    <h1>CHECKMACHINA V1.0</h1>
-    <label for="game">> Enter game title:</label><br><br>
-    <input type="text" id="game" placeholder="Half-Life Alyx" />
-    <button onclick="checkGame()">CHECK</button>
-    <div class="result" id="result"></div>
-  </div>
+    <h1>CHECKMACHINA™ V1.0</h1>
+    <div class="text-block">
+        Hello...<br>
+        Wake up...<br>
+        The CheckMachina has you...<br>
+        Follow the black rabbit.<br>
+        _ _ _ _ _ _ _
+    </div>
 
-  <script>
-    function checkGame() {
-      const game = document.getElementById("game").value.trim();
-      const result = document.getElementById("result");
-      if (game === "") {
-        result.innerHTML = "> Please enter a game name.";
-        return;
-      }
-      // Simulate check result for now
-      result.innerHTML = "> Your system can run '" + game + "' on HIGH settings.";
-    }
-  </script>
+    <div class="input-section">
+        <input type="text" placeholder="Enter game/program name...">
+        <button>[ CHECK ]</button>
+    </div>
+
+    <div class="footer">A project by Enrique Lledó ®</div>
 </body>
 </html>
